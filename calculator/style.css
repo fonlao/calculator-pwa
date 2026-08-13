@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    overflow: hidden;
+}
+
+.calculator {
+    background: #1e1e2e;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    width: 340px;
+    max-width: 95vw;
+    position: relative;
+}
+
+/* Офлайн-индикатор */
+.offline-indicator {
+    background: #ff3b30;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    display: none;
+}
+
+.offline-indicator.show {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Кнопка установки */
+.install-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #ff9500, #ff5e62);
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* Экран */
+.display {
+    background: #2a2a3e;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    padding: 20px;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+.formula {
+    color: #8888a0;
+    font-size: 16px;
+    text-align: right;
+    min-height: 20px;
+    word-break: break-all;
+    margin-bottom: 5px;
+}
+
+.result {
+    color: #fff;
+    font-size: 38px;
+    text-align: right;
+    word-break: break-all;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* Сетка кнопок */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.btn {
+    border: none;
+    border-radius: 12px;
+    font-size: 22px;
+    font-weight: 600;
+    height: 65px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+    color: #fff;
+}
+
+.btn:active { transform: scale(0.95); }
+
+.btn.number { background: #3a3a52; box-shadow: 0 4px 0 #2a2a3e; }
+.btn.number:hover { background: #45456a; }
+.btn.number:active { box-shadow: 0 2px 0 #2a2a3e; transform: translateY(2px); }
+
+.btn.operator { background: #ff9500; box-shadow: 0 4px 0 #c97800; font-size: 24px; }
+.btn.operator:hover { background: #ffa528; }
+.btn.operator:active { box-shadow: 0 2px 0 #c97800; transform: translateY(2px); }
+.btn.operator.active { background: #fff; color: #ff9500; }
+
+.btn.equals { background: #34c759; box-shadow: 0 4px 0 #28a047; font-size: 26px; grid-column: span 1; }
+.btn.equals:hover { background: #44d169; }
+.btn.equals:active { box-shadow: 0 2px 0 #28a047; transform: translateY(2px); }
+
+.btn.reset { background: #ff3b30; box-shadow: 0 4px 0 #c9281e; font-size: 22px; }
+.btn.reset:hover { background: #ff4d44; }
+.btn.reset:active { box-shadow: 0 2px 0 #c9281e; transform: translateY(2px); }
+
+.btn.backspace { background: #8e8e93; box-shadow: 0 4px 0 #6c6c70; font-size: 22px; }
+.btn.backspace:hover { background: #9d9da2; }
+.btn.backspace:active { box-shadow: 0 2px 0 #6c6c70; transform: translateY(2px); }
+
+/* Адаптивность для мобильных */
+@media (max-width: 380px) {
+    .calculator { width: 100%; border-radius: 0; min-height: 100vh; }
+    .btn { height: 60px; font-size: 20px; }
+    .result { font-size: 32px; }
+}
+
+/* Безопасная зона для iPhone с вырезом */
+@supports (padding: env(safe-area-inset-top)) {
+    .calculator {
+        padding-top: calc(20px + env(safe-area-inset-top));
+        padding-bottom: calc(20px + env(safe-area-inset-bottom));
+    }
+}
